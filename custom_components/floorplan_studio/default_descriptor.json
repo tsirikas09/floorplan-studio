@@ -1,0 +1,1407 @@
+{
+ "version": 1,
+ "house": {
+  "name": "Σπίτι"
+ },
+ "floors": [
+  {
+   "id": "g",
+   "name": "Ισόγειο",
+   "caption": "GROUND FLOOR",
+   "plan": {
+    "view": [
+     40,
+     4,
+     490,
+     288
+    ],
+    "walls": [
+     [
+      [
+       62,
+       14
+      ],
+      [
+       300,
+       52
+      ],
+      [
+       400,
+       52
+      ],
+      [
+       400,
+       152
+      ],
+      [
+       190,
+       152
+      ],
+      [
+       62,
+       138
+      ]
+     ],
+     [
+      [
+       404,
+       52
+      ],
+      [
+       481,
+       52
+      ],
+      [
+       481,
+       152
+      ],
+      [
+       404,
+       152
+      ]
+     ]
+    ],
+    "rooms": [
+     {
+      "id": "bedroom",
+      "name": "Υπνοδωμάτιο",
+      "polygon": [
+       [
+        62,
+        14
+       ],
+       [
+        185,
+        33.6
+       ],
+       [
+        185,
+        151.5
+       ],
+       [
+        62,
+        138
+       ]
+      ],
+      "popup": "g_bedroom",
+      "label": [
+       136,
+       41
+      ]
+     },
+     {
+      "id": "living",
+      "name": "Σαλόνι",
+      "polygon": [
+       [
+        185,
+        33.6
+       ],
+       [
+        292,
+        50.7
+       ],
+       [
+        292,
+        152
+       ],
+       [
+        185,
+        151.5
+       ]
+      ],
+      "popup": "g_living",
+      "label": [
+       238,
+       57
+      ]
+     },
+     {
+      "id": "kitchen",
+      "name": "Κουζίνα",
+      "polygon": [
+       [
+        292,
+        50.7
+       ],
+       [
+        400,
+        52
+       ],
+       [
+        400,
+        152
+       ],
+       [
+        292,
+        152
+       ]
+      ],
+      "popup": "g_kitchen",
+      "label": [
+       322,
+       146
+      ]
+     },
+     {
+      "id": "bath",
+      "name": "Μπάνιο",
+      "polygon": [
+       [
+        404,
+        52
+       ],
+       [
+        481,
+        52
+       ],
+       [
+        481,
+        152
+       ],
+       [
+        404,
+        152
+       ]
+      ],
+      "popup": "g_bath",
+      "label": [
+       443,
+       161.5
+      ]
+     },
+     {
+      "id": "yard",
+      "name": "Αυλή",
+      "polygon": [
+       [
+        284,
+        166
+       ],
+       [
+        508,
+        166
+       ],
+       [
+        508,
+        284
+       ],
+       [
+        284,
+        284
+       ]
+      ],
+      "popup": "g_yard",
+      "label": [
+       396,
+       252
+      ],
+      "style": "outdoor"
+     }
+    ],
+    "dividers": [
+     [
+      185,
+      33.6,
+      185,
+      151.5
+     ],
+     [
+      292,
+      50.7,
+      292,
+      152
+     ]
+    ],
+    "shapes": [
+     {
+      "t": "rect",
+      "x": 78,
+      "y": 56,
+      "w": 68,
+      "h": 58,
+      "r": 9
+     },
+     {
+      "t": "rect",
+      "x": 78,
+      "y": 56,
+      "w": 8,
+      "h": 58,
+      "r": 5
+     },
+     {
+      "t": "rect",
+      "x": 198,
+      "y": 66,
+      "w": 64,
+      "h": 20,
+      "r": 8
+     },
+     {
+      "t": "ellipse",
+      "cx": 232,
+      "cy": 108,
+      "rx": 14,
+      "ry": 9
+     },
+     {
+      "t": "rect",
+      "x": 300,
+      "y": 56,
+      "w": 96,
+      "h": 14,
+      "r": 5
+     },
+     {
+      "t": "rect",
+      "x": 352,
+      "y": 58,
+      "w": 20,
+      "h": 10,
+      "r": 4
+     },
+     {
+      "t": "circle",
+      "cx": 312,
+      "cy": 98,
+      "r": 7
+     },
+     {
+      "t": "circle",
+      "cx": 336,
+      "cy": 98,
+      "r": 7
+     },
+     {
+      "t": "arc",
+      "x1": 350,
+      "y1": 152,
+      "x2": 372,
+      "y2": 130,
+      "r": 22
+     },
+     {
+      "t": "rect",
+      "x": 410,
+      "y": 58,
+      "w": 20,
+      "h": 20,
+      "r": 6,
+      "dash": true
+     },
+     {
+      "t": "ellipse",
+      "cx": 468,
+      "cy": 128,
+      "rx": 8,
+      "ry": 11
+     },
+     {
+      "t": "circle",
+      "cx": 466,
+      "cy": 72,
+      "r": 9
+     },
+     {
+      "t": "circle",
+      "cx": 293,
+      "cy": 186,
+      "r": 13,
+      "green": true
+     },
+     {
+      "t": "rect",
+      "x": 484,
+      "y": 176,
+      "w": 20,
+      "h": 40,
+      "r": 8
+     }
+    ]
+   },
+   "devices": [
+    {
+     "id": "bd1",
+     "kind": "ceiling",
+     "name": "Φως 1 υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      112,
+      85
+     ],
+     "entity": "light.bedroom_bd_light_1"
+    },
+    {
+     "id": "bd2",
+     "kind": "lamp",
+     "name": "Φως 2 υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      84,
+      46
+     ],
+     "entity": "light.bedroom_bd_light_ontas_2"
+    },
+    {
+     "id": "bdw",
+     "kind": "strip",
+     "name": "LED υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      88,
+      126
+     ],
+     "entity": "light.wled_gledopto_2"
+    },
+    {
+     "id": "bds1",
+     "kind": "socket",
+     "name": "Πρίζα 1 υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      138,
+      92
+     ],
+     "entity": "switch.bd_socket_1",
+     "power": "sensor.bd_socket_1_power"
+    },
+    {
+     "id": "bds2",
+     "kind": "socket",
+     "name": "Πρίζα 2 υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      104,
+      40
+     ],
+     "entity": "switch.bd_socket_2",
+     "power": "sensor.bd_socket_2_power"
+    },
+    {
+     "id": "lvc",
+     "kind": "ceiling",
+     "name": "Φως οροφής σαλονιού",
+     "room": "living",
+     "pos": [
+      262,
+      112
+     ],
+     "entity": "light.lv_ceiling_1"
+    },
+    {
+     "id": "tv",
+     "kind": "tv",
+     "name": "Τηλεόραση",
+     "room": "living",
+     "pos": [
+      225,
+      136
+     ],
+     "entity": "media_player.todo_g_tv_1",
+     "color": "violet"
+    },
+    {
+     "id": "pres",
+     "kind": "person",
+     "name": "Παρουσία στο σαλόνι",
+     "room": "living",
+     "pos": [
+      205,
+      122
+     ],
+     "entity": "binary_sensor.dn_presence_1_presence",
+     "color": "green",
+     "tap": "more-info"
+    },
+    {
+     "id": "lvs_tv",
+     "kind": "socket",
+     "name": "Πρίζα τηλεόρασης",
+     "room": "living",
+     "pos": [
+      255,
+      140
+     ],
+     "entity": "switch.1pmmini_socket_2g_1pmmini_socket_tv",
+     "power": "sensor.1pmmini_socket_2g_1pmmini_socket_tv_power"
+    },
+    {
+     "id": "lvs2",
+     "kind": "socket",
+     "name": "Πρίζα σαλονιού",
+     "room": "living",
+     "pos": [
+      211,
+      44
+     ],
+     "entity": "switch.1pmmini_socket_3g_lv_socket_2",
+     "power": "sensor.1pmmini_socket_3g_lv_socket_2_power"
+    },
+    {
+     "id": "kl",
+     "kind": "spot",
+     "name": "Σποτ κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      330,
+      118
+     ],
+     "entity": "light.kitchen_k_light_1"
+    },
+    {
+     "id": "kled",
+     "kind": "strip",
+     "name": "LED πάγκου κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      318,
+      63
+     ],
+     "entity": "light.k_ledstrip_1"
+    },
+    {
+     "id": "ac",
+     "kind": "ac",
+     "name": "Κλιματιστικό",
+     "room": "kitchen",
+     "pos": [
+      392,
+      96
+     ],
+     "entity": "climate.todo_g_ac_1",
+     "color": "blue",
+     "tap": "more-info",
+     "popup_room": "living"
+    },
+    {
+     "id": "ks1",
+     "kind": "socket",
+     "name": "Πρίζα 1 κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      372,
+      62
+     ],
+     "entity": "switch.1pmmini_socket_6g_k_socket_1",
+     "power": "sensor.1pmmini_socket_6g_k_socket_1_power"
+    },
+    {
+     "id": "ks3",
+     "kind": "socket",
+     "name": "Πρίζα 3 κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      342,
+      62
+     ],
+     "entity": "switch.1pm_socket_1g_k_socket_3",
+     "power": "sensor.1pm_socket_1g_k_socket_3_power"
+    },
+    {
+     "id": "kse",
+     "kind": "socket",
+     "name": "Πρίζα εισόδου κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      372,
+      140
+     ],
+     "entity": "switch.1pmmini_socket_7g_k_socket_entrance",
+     "power": "sensor.1pmmini_socket_7g_k_socket_entrance_power"
+    },
+    {
+     "id": "bsp",
+     "kind": "spot",
+     "name": "Σποτ μπάνιου",
+     "room": "bath",
+     "pos": [
+      446,
+      64
+     ],
+     "entity": "light.bathroom_bth_spotlight_1"
+    },
+    {
+     "id": "bmi",
+     "kind": "lamp",
+     "name": "Φως καθρέφτη",
+     "room": "bath",
+     "pos": [
+      468,
+      94
+     ],
+     "entity": "switch.bth_light_mirror",
+     "power": "sensor.bth_light_mirror_power",
+     "nobolt": true
+    },
+    {
+     "id": "bled",
+     "kind": "strip",
+     "name": "LED μπάνιου",
+     "room": "bath",
+     "pos": [
+      440,
+      120
+     ],
+     "entity": "light.bth_ledstrip_1"
+    },
+    {
+     "id": "bwash",
+     "kind": "washer",
+     "name": "Πλυντήριο",
+     "room": "bath",
+     "pos": [
+      418,
+      134
+     ],
+     "entity": "switch.1pm_socket_2_bth_washing_1",
+     "color": "green",
+     "power": "sensor.1pm_socket_2_bth_washing_1_power",
+     "popup": "g_washer"
+    },
+    {
+     "id": "bs",
+     "kind": "socket",
+     "name": "Πρίζες μπάνιου",
+     "room": "bath",
+     "pos": [
+      456,
+      142
+     ],
+     "entity": "switch.1pm_socket_3g_bth_sockets",
+     "power": "sensor.1pm_socket_3g_bth_sockets_power"
+    },
+    {
+     "id": "boiler",
+     "kind": "boiler",
+     "name": "Θερμοσίφωνας",
+     "room": "bath",
+     "pos": [
+      418,
+      89
+     ],
+     "entity": "switch.boiler_ground",
+     "color": "orange",
+     "hot": "sensor.ground_hotwater_temperature",
+     "hot_popup": "g_hotwater_history"
+    },
+    {
+     "id": "ysp",
+     "kind": "spot",
+     "name": "Προβολείς αυλής",
+     "room": "yard",
+     "pos": [
+      382,
+      178
+     ],
+     "entity": "light.outdoor_yard_out_spotlights_1"
+    },
+    {
+     "id": "ywl",
+     "kind": "lamp",
+     "name": "Φώτα τοίχου αυλής",
+     "room": "yard",
+     "pos": [
+      300,
+      240
+     ],
+     "entity": "light.outdoor_yard_out_wall_lights"
+    },
+    {
+     "id": "ys",
+     "kind": "socket",
+     "name": "Πρίζα αυλής",
+     "room": "yard",
+     "pos": [
+      300,
+      206
+     ],
+     "entity": "switch.1pmmini_socket_7g_out_socket_1",
+     "power": "sensor.1pmmini_socket_7g_out_socket_1_power"
+    },
+    {
+     "id": "valve",
+     "kind": "valve",
+     "name": "Βάνα νερού αυλής",
+     "room": "yard",
+     "pos": [
+      340,
+      270
+     ],
+     "entity": "switch.out_watervalve_1",
+     "color": "blue",
+     "flow": "sensor.water_meter_water_meter_1_flow",
+     "nobolt": true,
+     "flow_popup": "g_water"
+    },
+    {
+     "id": "cam",
+     "kind": "camera",
+     "name": "Κάμερα αυλής",
+     "room": "yard",
+     "pos": [
+      330,
+      178
+     ],
+     "color": "green",
+     "popup": "g_yard"
+    },
+    {
+     "id": "bell",
+     "kind": "bell",
+     "name": "Κουδούνι εισόδου",
+     "room": "yard",
+     "pos": [
+      392,
+      159
+     ],
+     "color": "green",
+     "popup": "g_yard"
+    }
+   ],
+   "readouts": {
+    "power": "sensor.proem_consumption_1g_energy_meter_1_power",
+    "power_popup": "g_energy",
+    "water": "sensor.water_meter_water_meter_1_flow",
+    "water_popup": "g_water",
+    "presence": "binary_sensor.dn_presence_1_presence",
+    "illuminance": "sensor.dn_presence_1_illuminance",
+    "temperature": "sensor.dn_presence_1_temperature",
+    "humidity": "sensor.dn_presence_1_humidity"
+   }
+  },
+  {
+   "id": "u",
+   "name": "Πρώτος όροφος",
+   "caption": "FIRST FLOOR",
+   "plan": {
+    "view": [
+     42,
+     52,
+     600,
+     300
+    ],
+    "walls": [
+     [
+      [
+       65,
+       62
+      ],
+      [
+       272,
+       78
+      ],
+      [
+       590,
+       85
+      ],
+      [
+       612,
+       233
+      ],
+      [
+       63,
+       233
+      ]
+     ],
+     [
+      [
+       330,
+       236
+      ],
+      [
+       442,
+       236
+      ],
+      [
+       442,
+       326
+      ],
+      [
+       330,
+       326
+      ]
+     ],
+     [
+      [
+       470,
+       236
+      ],
+      [
+       564,
+       236
+      ],
+      [
+       564,
+       326
+      ],
+      [
+       470,
+       326
+      ]
+     ]
+    ],
+    "rooms": [
+     {
+      "id": "bedroom",
+      "name": "Υπνοδωμάτιο",
+      "polygon": [
+       [
+        65,
+        62
+       ],
+       [
+        272,
+        78
+       ],
+       [
+        274,
+        233
+       ],
+       [
+        63,
+        233
+       ]
+      ],
+      "popup": "u_bedroom",
+      "label": [
+       160,
+       224
+      ]
+     },
+     {
+      "id": "living",
+      "name": "Σαλόνι",
+      "polygon": [
+       [
+        272,
+        78
+       ],
+       [
+        465,
+        83
+       ],
+       [
+        465,
+        233
+       ],
+       [
+        274,
+        233
+       ]
+      ],
+      "popup": "u_living",
+      "label": [
+       338,
+       224
+      ]
+     },
+     {
+      "id": "kitchen",
+      "name": "Κουζίνα",
+      "polygon": [
+       [
+        465,
+        83
+       ],
+       [
+        590,
+        85
+       ],
+       [
+        612,
+        233
+       ],
+       [
+        465,
+        233
+       ]
+      ],
+      "popup": "u_kitchen",
+      "label": [
+       530,
+       222
+      ]
+     },
+     {
+      "id": "wc",
+      "name": "WC",
+      "polygon": [
+       [
+        470,
+        236
+       ],
+       [
+        564,
+        236
+       ],
+       [
+        564,
+        326
+       ],
+       [
+        470,
+        326
+       ]
+      ],
+      "popup": "u_wc",
+      "label": [
+       517,
+       343
+      ]
+     },
+     {
+      "id": "stairs",
+      "name": "Σκάλα και είσοδος",
+      "polygon": [
+       [
+        330,
+        236
+       ],
+       [
+        442,
+        236
+       ],
+       [
+        442,
+        326
+       ],
+       [
+        330,
+        326
+       ]
+      ],
+      "popup": "u_stairs",
+      "label": [
+       386,
+       343
+      ]
+     }
+    ],
+    "dividers": [
+     [
+      274,
+      80,
+      274,
+      233
+     ],
+     [
+      465,
+      83,
+      465,
+      233
+     ]
+    ],
+    "shapes": [
+     {
+      "t": "rect",
+      "x": 98,
+      "y": 100,
+      "w": 87,
+      "h": 95,
+      "r": 9
+     },
+     {
+      "t": "rect",
+      "x": 98,
+      "y": 100,
+      "w": 20,
+      "h": 95,
+      "r": 5
+     },
+     {
+      "t": "circle",
+      "cx": 82,
+      "cy": 208,
+      "r": 12
+     },
+     {
+      "t": "rect",
+      "x": 237,
+      "y": 88,
+      "w": 35,
+      "h": 87,
+      "r": 4
+     },
+     {
+      "t": "rect",
+      "x": 320,
+      "y": 98,
+      "w": 45,
+      "h": 42,
+      "r": 9
+     },
+     {
+      "t": "rect",
+      "x": 368,
+      "y": 98,
+      "w": 50,
+      "h": 42,
+      "r": 9
+     },
+     {
+      "t": "ellipse",
+      "cx": 355,
+      "cy": 168,
+      "rx": 20,
+      "ry": 13
+     },
+     {
+      "t": "rect",
+      "x": 463,
+      "y": 88,
+      "w": 99,
+      "h": 30,
+      "r": 5
+     },
+     {
+      "t": "rect",
+      "x": 498,
+      "y": 92,
+      "w": 30,
+      "h": 20,
+      "r": 4
+     },
+     {
+      "t": "circle",
+      "cx": 550,
+      "cy": 103,
+      "r": 7
+     },
+     {
+      "t": "circle",
+      "cx": 555,
+      "cy": 160,
+      "r": 11
+     },
+     {
+      "t": "circle",
+      "cx": 555,
+      "cy": 188,
+      "r": 11
+     },
+     {
+      "t": "circle",
+      "cx": 490,
+      "cy": 278,
+      "r": 10
+     },
+     {
+      "t": "ellipse",
+      "cx": 545,
+      "cy": 300,
+      "rx": 9,
+      "ry": 13
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 250,
+      "x2": 438,
+      "y2": 250,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 260,
+      "x2": 438,
+      "y2": 260,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 270,
+      "x2": 438,
+      "y2": 270,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 280,
+      "x2": 438,
+      "y2": 280,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 290,
+      "x2": 438,
+      "y2": 290,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 300,
+      "x2": 438,
+      "y2": 300,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 310,
+      "x2": 438,
+      "y2": 310,
+      "faint": true
+     },
+     {
+      "t": "line",
+      "x1": 336,
+      "y1": 320,
+      "x2": 438,
+      "y2": 320,
+      "faint": true
+     }
+    ]
+   },
+   "devices": [
+    {
+     "id": "bdr",
+     "kind": "ceiling",
+     "name": "Φως R υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      82,
+      90
+     ],
+     "entity": "light.bedroom_bd_light_r"
+    },
+    {
+     "id": "bdl",
+     "kind": "ceiling",
+     "name": "Φως L υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      80,
+      183
+     ],
+     "entity": "light.bedroom_bd_light_l"
+    },
+    {
+     "id": "bd1",
+     "kind": "ceiling",
+     "name": "Φως 1 (dimmer)",
+     "room": "bedroom",
+     "pos": [
+      206,
+      150
+     ],
+     "entity": "light.dim_light_1u_bd_light_1"
+    },
+    {
+     "id": "ac1",
+     "kind": "ac",
+     "name": "Κλιματιστικό υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      208,
+      96
+     ],
+     "entity": "climate.todo_u_ac_1",
+     "color": "blue",
+     "tap": "more-info"
+    },
+    {
+     "id": "sr",
+     "kind": "socket",
+     "name": "Πρίζα R υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      104,
+      80
+     ],
+     "entity": "switch.bd_socket_r",
+     "power": "sensor.bd_socket_r_power"
+    },
+    {
+     "id": "sl",
+     "kind": "socket",
+     "name": "Πρίζα L υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      100,
+      176
+     ],
+     "entity": "switch.bd_socket_l",
+     "power": "sensor.bd_socket_l_power"
+    },
+    {
+     "id": "s1",
+     "kind": "socket",
+     "name": "Πρίζα 1 υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      222,
+      76
+     ],
+     "entity": "switch.1pmmini_socket_1_bd_socket_1",
+     "power": "sensor.1pmmini_socket_1_bd_socket_1_power"
+    },
+    {
+     "id": "s4",
+     "kind": "socket",
+     "name": "Πρίζα 4 υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      140,
+      220
+     ],
+     "entity": "switch.1pmmini_socket_bdu_bd_socket_4",
+     "power": "sensor.1pmmini_socket_bdu_bd_socket_4_power"
+    },
+    {
+     "id": "sd",
+     "kind": "socket",
+     "name": "Πρίζα πόρτας υπνοδωματίου",
+     "room": "bedroom",
+     "pos": [
+      262,
+      226
+     ],
+     "entity": "switch.1pmmini_socket_4u_bd_socket_door",
+     "power": "sensor.1pmmini_socket_4u_bd_socket_door_power"
+    },
+    {
+     "id": "lvled",
+     "kind": "strip",
+     "name": "LED σαλονιού",
+     "room": "living",
+     "pos": [
+      325,
+      152
+     ],
+     "entity": "light.shellyplusrgbwpm_3076f53b6034_light_2"
+    },
+    {
+     "id": "tv",
+     "kind": "tv",
+     "name": "Τηλεόραση",
+     "room": "living",
+     "pos": [
+      410,
+      208
+     ],
+     "entity": "media_player.todo_u_tv_1",
+     "color": "violet"
+    },
+    {
+     "id": "ac2",
+     "kind": "ac",
+     "name": "Κλιματιστικό σαλονιού",
+     "room": "living",
+     "pos": [
+      440,
+      100
+     ],
+     "entity": "climate.todo_u_ac_2",
+     "color": "blue",
+     "tap": "more-info"
+    },
+    {
+     "id": "pres",
+     "kind": "person",
+     "name": "Παρουσία στο σαλόνι",
+     "room": "living",
+     "pos": [
+      300,
+      172
+     ],
+     "entity": "binary_sensor.up_presence_1_presence",
+     "color": "green",
+     "tap": "more-info"
+    },
+    {
+     "id": "ls1",
+     "kind": "socket",
+     "name": "Πρίζα 1 σαλονιού",
+     "room": "living",
+     "pos": [
+      285,
+      120
+     ],
+     "entity": "switch.1pmmini_socket_5u_lv_socket_1",
+     "power": "sensor.1pmmini_socket_5u_lv_socket_1_power"
+    },
+    {
+     "id": "ls2",
+     "kind": "socket",
+     "name": "Πρίζα 2 σαλονιού",
+     "room": "living",
+     "pos": [
+      352,
+      88
+     ],
+     "entity": "switch.1pmmini_socket_6u_lv_socket_2",
+     "power": "sensor.1pmmini_socket_6u_lv_socket_2_power"
+    },
+    {
+     "id": "ls3",
+     "kind": "socket",
+     "name": "Πρίζα 3 σαλονιού",
+     "room": "living",
+     "pos": [
+      323,
+      214
+     ],
+     "entity": "switch.1pmmini_socket_7_lv_socket_3",
+     "power": "sensor.1pmmini_socket_7_lv_socket_3_power"
+    },
+    {
+     "id": "ksp",
+     "kind": "spot",
+     "name": "Σποτ κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      484,
+      157
+     ],
+     "entity": "light.kitchen_k_spotlights_1"
+    },
+    {
+     "id": "kled",
+     "kind": "strip",
+     "name": "LED κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      513,
+      128
+     ],
+     "entity": "light.shellyplusrgbwpm_3076f53b6034_light_3"
+    },
+    {
+     "id": "kwled",
+     "kind": "strip",
+     "name": "WLED κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      585,
+      176
+     ],
+     "entity": "light.wled"
+    },
+    {
+     "id": "ks1",
+     "kind": "socket",
+     "name": "Πρίζα 1 κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      573,
+      100
+     ],
+     "entity": "switch.1pm_socket_1_k_socket_1",
+     "power": "sensor.1pm_socket_1_k_socket_1_power"
+    },
+    {
+     "id": "ks2",
+     "kind": "socket",
+     "name": "Πρίζα 2 κουζίνας",
+     "room": "kitchen",
+     "pos": [
+      595,
+      132
+     ],
+     "entity": "switch.1pm_socket_2u_k_socket_2",
+     "power": "sensor.1pm_socket_2u_k_socket_2_power"
+    },
+    {
+     "id": "olu",
+     "kind": "ceiling",
+     "name": "Φως σκάλας",
+     "room": "stairs",
+     "pos": [
+      400,
+      262
+     ],
+     "entity": "light.out_light_u"
+    },
+    {
+     "id": "oled",
+     "kind": "strip",
+     "name": "LED σκάλας",
+     "room": "stairs",
+     "pos": [
+      400,
+      304
+     ],
+     "entity": "light.shellyplusrgbwpm_3076f53b6034_light_1"
+    },
+    {
+     "id": "cam",
+     "kind": "camera",
+     "name": "Κάμερα σκάλας",
+     "room": "stairs",
+     "pos": [
+      352,
+      252
+     ],
+     "color": "green",
+     "popup": "u_stairs"
+    },
+    {
+     "id": "bell",
+     "kind": "bell",
+     "name": "Κουδούνι εισόδου",
+     "room": "stairs",
+     "pos": [
+      452,
+      224
+     ],
+     "color": "green",
+     "popup": "u_stairs"
+    },
+    {
+     "id": "wcl",
+     "kind": "ceiling",
+     "name": "Φως WC",
+     "room": "wc",
+     "pos": [
+      505,
+      255
+     ],
+     "entity": "light.1pmmini_switch_bthu_bth_light_1"
+    },
+    {
+     "id": "boiler",
+     "kind": "boiler",
+     "name": "Θερμοσίφωνας",
+     "room": "wc",
+     "pos": [
+      545,
+      256
+     ],
+     "entity": "switch.boiler_first",
+     "color": "orange",
+     "hot": "sensor.upper_hotwater_temperature",
+     "hot_popup": "u_hotwater_history"
+    },
+    {
+     "id": "wcs",
+     "kind": "socket",
+     "name": "Πρίζα WC",
+     "room": "wc",
+     "pos": [
+      522,
+      312
+     ],
+     "entity": "switch.1pm_socket_4_bth_socket_1",
+     "power": "sensor.1pm_socket_4_bth_socket_1_power"
+    }
+   ],
+   "readouts": {
+    "power": "sensor.proem_consumption_1u_energy_meter_1_power",
+    "power_popup": "u_energy",
+    "water": "sensor.water_meter_water_meter_2_flow",
+    "water_popup": "u_water",
+    "presence": "binary_sensor.up_presence_1_presence",
+    "illuminance": "sensor.up_presence_1_illuminance",
+    "temperature": "sensor.up_presence_1_temperature",
+    "humidity": "sensor.up_presence_1_humidity"
+   }
+  }
+ ]
+}

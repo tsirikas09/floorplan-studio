@@ -1,0 +1,1420 @@
+# Παράδειγμα dashboard (Ισόγειο). Η πρώτη κάρτα είναι η κάρτα του Floorplan Studio, οι υπόλοιπες είναι τα popups (Bubble Card >= 3.2 + Mushroom).
+# Επικόλληση: νέο dashboard -> Επεξεργασία -> τρεις τελείες -> Raw configuration editor.
+# Αν δεν έχεις Kiosk Mode ή το θέμα atelier, σβήσε τις γραμμές kiosk_mode και theme.
+title: Ισόγειο
+kiosk_mode:
+  kiosk: true
+views:
+- title: Κάτοψη
+  path: floorplan
+  icon: mdi:floor-plan
+  type: sections
+  theme: atelier
+  max_columns: 2
+  sections:
+  - type: grid
+    column_span: 2
+    cards:
+    - type: custom:floorplan-studio-card
+      floor: g
+      grid_options:
+        columns: full
+  - type: grid
+    column_span: 2
+    cards:
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_bedroom'
+      name: Υπνοδωμάτιο
+      icon: mdi:bed
+      grid_options:
+        columns: full
+      cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: Φωτισμός και έλεγχοι
+        icon: mdi:lightbulb-outline
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-light-card
+          entity: light.bedroom_bd_light_1
+          name: Φως 1 υπνοδωματίου
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-light-card
+          entity: light.bedroom_bd_light_ontas_2
+          name: Φως 2 υπνοδωματίου
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-light-card
+          entity: light.wled_gledopto_2
+          name: LED υπνοδωματίου
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Πρίζες
+        icon: mdi:power-socket-eu
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: conditional
+          conditions:
+          - &id001
+            condition: numeric_state
+            entity: sensor.bd_socket_1_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.bd_socket_1
+            primary: Πρίζα 1 υπνοδωματίου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.bd_socket_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.bd_socket_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.bd_socket_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα 1 υπνοδωματίου» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id001
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.bd_socket_1
+            primary: Πρίζα 1 υπνοδωματίου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.bd_socket_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.bd_socket_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.bd_socket_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        - type: conditional
+          conditions:
+          - &id002
+            condition: numeric_state
+            entity: sensor.bd_socket_2_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.bd_socket_2
+            primary: Πρίζα 2 υπνοδωματίου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.bd_socket_2'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.bd_socket_2_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.bd_socket_2'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα 2 υπνοδωματίου» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id002
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.bd_socket_2
+            primary: Πρίζα 2 υπνοδωματίου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.bd_socket_2'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.bd_socket_2_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.bd_socket_2'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Περισσότερα
+        icon: mdi:information-outline
+        tap_action:
+          action: navigate
+          navigation_path: '#g_bedroom_info'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_bedroom_info'
+      name: Υπνοδωμάτιο · Πληροφορίες
+      icon: mdi:information-outline
+      grid_options:
+        columns: full
+      cards:
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-template-card
+          entity: sensor.bd_light_1_power
+          primary: Ισχύς φωτός 1
+          secondary: '{{ states(''sensor.bd_light_1_power'') }} W'
+          icon: mdi:flash
+          icon_color: blue
+          tap_action: &id003
+            action: more-info
+        - type: custom:mushroom-template-card
+          entity: sensor.bd_light_ontas_2_power
+          primary: Ισχύς φωτός 2
+          secondary: '{{ states(''sensor.bd_light_ontas_2_power'') }} W'
+          icon: mdi:flash
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.wled_gledopto_estimated_current_2
+          primary: Ρεύμα WLED
+          secondary: '{{ states(''sensor.wled_gledopto_estimated_current_2'') }} mA'
+          icon: mdi:current-dc
+          icon_color: blue
+          tap_action: *id003
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_bedroom'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_living'
+      name: Σαλόνι
+      icon: mdi:sofa
+      grid_options:
+        columns: full
+      cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: Φωτισμός και έλεγχοι
+        icon: mdi:lightbulb-outline
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-light-card
+          entity: light.lv_ceiling_1
+          name: Φως οροφής σαλονιού
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:mushroom-media-player-card
+        entity: media_player.todo_g_tv_1
+        name: Τηλεόραση
+        use_media_info: true
+        collapsible_controls: true
+        volume_controls:
+        - volume_mute
+        - volume_set
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:mushroom-climate-card
+        entity: climate.todo_g_ac_1
+        name: Κλιματιστικό
+        show_temperature_control: true
+        collapsible_controls: true
+        hvac_modes:
+        - 'off'
+        - heat
+        - cool
+        - auto
+        - dry
+        - fan_only
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Πρίζες
+        icon: mdi:power-socket-eu
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: conditional
+          conditions:
+          - &id004
+            condition: numeric_state
+            entity: sensor.1pmmini_socket_2g_1pmmini_socket_tv_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_2g_1pmmini_socket_tv
+            primary: Πρίζα τηλεόρασης
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_2g_1pmmini_socket_tv'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_2g_1pmmini_socket_tv_power'')|float(0)|round(0)
+              }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_2g_1pmmini_socket_tv'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα τηλεόρασης» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id004
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_2g_1pmmini_socket_tv
+            primary: Πρίζα τηλεόρασης
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_2g_1pmmini_socket_tv'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_2g_1pmmini_socket_tv_power'')|float(0)|round(0)
+              }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_2g_1pmmini_socket_tv'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        - type: conditional
+          conditions:
+          - &id005
+            condition: numeric_state
+            entity: sensor.1pmmini_socket_3g_lv_socket_2_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_3g_lv_socket_2
+            primary: Πρίζα σαλονιού
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_3g_lv_socket_2'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_3g_lv_socket_2_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_3g_lv_socket_2'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα σαλονιού» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id005
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_3g_lv_socket_2
+            primary: Πρίζα σαλονιού
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_3g_lv_socket_2'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_3g_lv_socket_2_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_3g_lv_socket_2'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Περισσότερα
+        icon: mdi:information-outline
+        tap_action:
+          action: navigate
+          navigation_path: '#g_living_info'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_living_info'
+      name: Σαλόνι · Πληροφορίες
+      icon: mdi:information-outline
+      grid_options:
+        columns: full
+      cards:
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-template-card
+          entity: binary_sensor.dn_presence_1_presence
+          primary: Παρουσία
+          secondary: '{{ ''Εντοπίστηκε'' if is_state(''binary_sensor.dn_presence_1_presence'',''on'') else ''Καμία'' }}'
+          icon: mdi:motion-sensor
+          icon_color: green
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.dn_presence_1_temperature
+          primary: Θερμοκρασία
+          secondary: '{{ states(''sensor.dn_presence_1_temperature'') }} °C'
+          icon: mdi:thermometer
+          icon_color: orange
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.dn_presence_1_humidity
+          primary: Υγρασία
+          secondary: '{{ states(''sensor.dn_presence_1_humidity'') }} %'
+          icon: mdi:water-percent
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.dn_presence_1_illuminance
+          primary: Φωτεινότητα
+          secondary: '{{ states(''sensor.dn_presence_1_illuminance'') }} lx'
+          icon: mdi:brightness-5
+          icon_color: amber
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: binary_sensor.ground_maindoor_contact
+          primary: Κεντρική πόρτα
+          secondary: '{{ ''Ανοιχτή'' if is_state(''binary_sensor.ground_maindoor_contact'',''on'') else ''Κλειστή'' }}'
+          icon: mdi:door
+          icon_color: teal
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.dn_presence_1_battery
+          primary: Μπαταρία αισθητήρα
+          secondary: '{{ states(''sensor.dn_presence_1_battery'') }} %'
+          icon: mdi:battery
+          icon_color: grey
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.ground_maindoor_battery
+          primary: Μπαταρία πόρτας
+          secondary: '{{ states(''sensor.ground_maindoor_battery'') }} %'
+          icon: mdi:battery
+          icon_color: grey
+          tap_action: *id003
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_living'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_kitchen'
+      name: Κουζίνα
+      icon: mdi:countertop
+      grid_options:
+        columns: full
+      cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: Φωτισμός και έλεγχοι
+        icon: mdi:lightbulb-outline
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-light-card
+          entity: light.kitchen_k_light_1
+          name: Σποτ κουζίνας
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-light-card
+          entity: light.k_ledstrip_1
+          name: LED πάγκου κουζίνας
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Πρίζες
+        icon: mdi:power-socket-eu
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: conditional
+          conditions:
+          - &id006
+            condition: numeric_state
+            entity: sensor.1pmmini_socket_6g_k_socket_1_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_6g_k_socket_1
+            primary: Πρίζα 1 κουζίνας
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_6g_k_socket_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_6g_k_socket_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_6g_k_socket_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα 1 κουζίνας» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id006
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_6g_k_socket_1
+            primary: Πρίζα 1 κουζίνας
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_6g_k_socket_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_6g_k_socket_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_6g_k_socket_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        - type: conditional
+          conditions:
+          - &id007
+            condition: numeric_state
+            entity: sensor.1pm_socket_1g_k_socket_3_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_1g_k_socket_3
+            primary: Πρίζα 3 κουζίνας
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_1g_k_socket_3'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_1g_k_socket_3_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_1g_k_socket_3'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα 3 κουζίνας» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id007
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_1g_k_socket_3
+            primary: Πρίζα 3 κουζίνας
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_1g_k_socket_3'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_1g_k_socket_3_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_1g_k_socket_3'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        - type: conditional
+          conditions:
+          - &id008
+            condition: numeric_state
+            entity: sensor.1pmmini_socket_7g_k_socket_entrance_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_7g_k_socket_entrance
+            primary: Πρίζα εισόδου κουζίνας
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_7g_k_socket_entrance'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_7g_k_socket_entrance_power'')|float(0)|round(0)
+              }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_7g_k_socket_entrance'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα εισόδου κουζίνας» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id008
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_7g_k_socket_entrance
+            primary: Πρίζα εισόδου κουζίνας
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_7g_k_socket_entrance'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_7g_k_socket_entrance_power'')|float(0)|round(0)
+              }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_7g_k_socket_entrance'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Περισσότερα
+        icon: mdi:information-outline
+        tap_action:
+          action: navigate
+          navigation_path: '#g_kitchen_info'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_kitchen_info'
+      name: Κουζίνα · Πληροφορίες
+      icon: mdi:information-outline
+      grid_options:
+        columns: full
+      cards:
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-template-card
+          entity: binary_sensor.k_smoke_1g_smoke
+          primary: Καπνός
+          secondary: '{{ ''ΕΝΤΟΠΙΣΤΗΚΕ ΚΑΠΝΟΣ'' if is_state(''binary_sensor.k_smoke_1g_smoke'',''on'') else ''Όλα καλά'' }}'
+          icon: mdi:smoke-detector
+          icon_color: green
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.k_smoke_1g_battery
+          primary: Μπαταρία ανιχνευτή
+          secondary: '{{ states(''sensor.k_smoke_1g_battery'') }} %'
+          icon: mdi:battery
+          icon_color: grey
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.k_light_1_power
+          primary: Ισχύς φωτός
+          secondary: '{{ states(''sensor.k_light_1_power'') }} W'
+          icon: mdi:flash
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.k_ledstrip_1_power
+          primary: Ισχύς LED
+          secondary: '{{ states(''sensor.k_ledstrip_1_power'') }} W'
+          icon: mdi:flash
+          icon_color: blue
+          tap_action: *id003
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_kitchen'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_bath'
+      name: Μπάνιο
+      icon: mdi:shower
+      grid_options:
+        columns: full
+      cards:
+      - type: custom:bubble-card
+        card_type: separator
+        name: Φωτισμός και έλεγχοι
+        icon: mdi:lightbulb-outline
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-light-card
+          entity: light.bathroom_bth_spotlight_1
+          name: Σποτ μπάνιου
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-light-card
+          entity: light.bth_ledstrip_1
+          name: LED μπάνιου
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-template-card
+          entity: switch.bth_light_mirror
+          primary: Φως καθρέφτη
+          secondary: '{{ ''Ανοιχτό'' if is_state(''switch.bth_light_mirror'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.bth_light_mirror_power'')|float(0)|round(0) }} W'
+          icon: mdi:mirror
+          icon_color: '{{ ''amber'' if is_state(''switch.bth_light_mirror'',''on'') else ''disabled'' }}'
+          tap_action:
+            action: toggle
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-template-card
+          entity: switch.boiler_ground
+          primary: Θερμοσίφωνας
+          secondary: '{{ ''Ανοιχτό'' if is_state(''switch.boiler_ground'',''on'') else ''Κλειστό'' }}'
+          icon: mdi:water-boiler
+          icon_color: '{{ ''orange'' if is_state(''switch.boiler_ground'',''on'') else ''disabled'' }}'
+          tap_action:
+            action: toggle
+          grid_options:
+            columns: 12
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Πρίζες
+        icon: mdi:power-socket-eu
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: conditional
+          conditions:
+          - &id009
+            condition: numeric_state
+            entity: sensor.1pm_socket_2_bth_washing_1_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_2_bth_washing_1
+            primary: Πλυντήριο
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_2_bth_washing_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:washing-machine
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Το πλυντήριο καταναλώνει ρεύμα (πιθανόν πλένει). Αν κλείσεις την πρίζα ο κύκλος θα διακοπεί. Είσαι σίγουρος;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id009
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_2_bth_washing_1
+            primary: Πλυντήριο
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_2_bth_washing_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:washing-machine
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        - type: conditional
+          conditions:
+          - &id010
+            condition: numeric_state
+            entity: sensor.1pm_socket_3g_bth_sockets_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_3g_bth_sockets
+            primary: Πρίζες μπάνιου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_3g_bth_sockets'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_3g_bth_sockets_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_3g_bth_sockets'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζες μπάνιου» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id010
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_3g_bth_sockets
+            primary: Πρίζες μπάνιου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_3g_bth_sockets'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_3g_bth_sockets_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_3g_bth_sockets'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πλυντήριο · κατάσταση και ιστορικό
+        icon: mdi:washing-machine
+        tap_action:
+          action: navigate
+          navigation_path: '#g_washer'
+        grid_options:
+          columns: 12
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Περισσότερα
+        icon: mdi:information-outline
+        tap_action:
+          action: navigate
+          navigation_path: '#g_bath_info'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_bath_info'
+      name: Μπάνιο · Πληροφορίες
+      icon: mdi:information-outline
+      grid_options:
+        columns: full
+      cards:
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-template-card
+          entity: sensor.ground_hotwater_temperature
+          primary: Ζεστό νερό
+          secondary: '{{ states(''sensor.ground_hotwater_temperature'') }} °C'
+          icon: mdi:water-thermometer
+          icon_color: orange
+          tap_action:
+            action: navigate
+            navigation_path: '#g_hotwater_history'
+        - type: custom:mushroom-template-card
+          entity: sensor.ground_hotwater_battery
+          primary: Μπαταρία αισθητήρα
+          secondary: '{{ states(''sensor.ground_hotwater_battery'') }} %'
+          icon: mdi:battery
+          icon_color: grey
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.bth_spotlight_1_power
+          primary: Ισχύς σποτ
+          secondary: '{{ states(''sensor.bth_spotlight_1_power'') }} W'
+          icon: mdi:flash
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.bth_ledstrip_1_power
+          primary: Ισχύς LED
+          secondary: '{{ states(''sensor.bth_ledstrip_1_power'') }} W'
+          icon: mdi:flash
+          icon_color: blue
+          tap_action: *id003
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_bath'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_yard'
+      name: Αυλή
+      icon: mdi:tree
+      grid_options:
+        columns: full
+      cards:
+      - type: picture-entity
+        entity: camera.todo_g_cam_1
+        camera_view: auto
+        show_name: true
+        show_state: false
+        name: Κάμερα αυλής
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: picture-entity
+        entity: camera.todo_g_doorbell_1
+        camera_view: auto
+        show_name: true
+        show_state: false
+        name: Κουδούνι εισόδου
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Φωτισμός και έλεγχοι
+        icon: mdi:lightbulb-outline
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-light-card
+          entity: light.outdoor_yard_out_spotlights_1
+          name: Προβολείς αυλής
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-light-card
+          entity: light.outdoor_yard_out_wall_lights
+          name: Φώτα τοίχου αυλής
+          show_brightness_control: true
+          use_light_color: true
+          collapsible_controls: true
+          grid_options:
+            columns: 12
+        - type: custom:mushroom-template-card
+          entity: switch.out_watervalve_1
+          primary: Βάνα νερού αυλής
+          secondary: '{{ ''Ανοιχτό'' if is_state(''switch.out_watervalve_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.out_watervalve_1_power'')|float(0)|round(0) }} W'
+          icon: mdi:valve
+          icon_color: '{{ ''blue'' if is_state(''switch.out_watervalve_1'',''on'') else ''disabled'' }}'
+          tap_action:
+            action: toggle
+          grid_options:
+            columns: 12
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Πρίζες
+        icon: mdi:power-socket-eu
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: conditional
+          conditions:
+          - &id011
+            condition: numeric_state
+            entity: sensor.1pmmini_socket_7g_out_socket_1_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_7g_out_socket_1
+            primary: Πρίζα αυλής
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_7g_out_socket_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_7g_out_socket_1_power'')|float(0)|round(0) }}
+              W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_7g_out_socket_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Η «Πρίζα αυλής» καταναλώνει ρεύμα αυτή τη στιγμή. Είσαι σίγουρος ότι θέλεις να την απενεργοποιήσεις;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id011
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pmmini_socket_7g_out_socket_1
+            primary: Πρίζα αυλής
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pmmini_socket_7g_out_socket_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pmmini_socket_7g_out_socket_1_power'')|float(0)|round(0) }}
+              W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pmmini_socket_7g_out_socket_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        grid_options:
+          columns: 12
+          rows: auto
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_energy'
+      name: Ρεύμα · Ισόγειο
+      icon: mdi:flash
+      grid_options:
+        columns: full
+      cards:
+      - type: markdown
+        content: "{% set items = [('sensor.bd_light_1_power','Φως 1 υπνοδωματίου'), ('sensor.bd_light_ontas_2_power','Φως 2 υπνοδωματίου'), ('sensor.bd_socket_1_power','Πρίζα 1 υπνοδωματίου'), ('sensor.bd_socket_2_power','Πρίζα\
+          \ 2 υπνοδωματίου'), ('sensor.lv_ceiling_1_power','Φως σαλονιού'), ('sensor.1pmmini_socket_2g_1pmmini_socket_tv_power','Πρίζα τηλεόρασης'), ('sensor.1pmmini_socket_3g_lv_socket_2_power','Πρίζα\
+          \ σαλονιού'), ('sensor.k_light_1_power','Σποτ κουζίνας'), ('sensor.k_ledstrip_1_power','LED πάγκου'), ('sensor.1pmmini_socket_6g_k_socket_1_power','Πρίζα 1 κουζίνας'), ('sensor.1pm_socket_1g_k_socket_3_power','Πρίζα\
+          \ 3 κουζίνας'), ('sensor.1pmmini_socket_7g_k_socket_entrance_power','Πρίζα εισόδου κουζίνας'), ('sensor.bth_light_mirror_power','Φως καθρέφτη'), ('sensor.bth_spotlight_1_power','Σποτ μπάνιου'),\
+          \ ('sensor.bth_ledstrip_1_power','LED μπάνιου'), ('sensor.1pm_socket_2_bth_washing_1_power','Πλυντήριο'), ('sensor.1pm_socket_3g_bth_sockets_power','Πρίζες μπάνιου'), ('sensor.out_spotlights_1_power','Προβολείς\
+          \ αυλής'), ('sensor.out_wall_lights_power','Φώτα τοίχου αυλής'), ('sensor.out_watervalve_1_power','Βάνα νερού'), ('sensor.1pmmini_socket_7g_out_socket_1_power','Πρίζα αυλής'), ('sensor.1pmmini_server_1g_ep_server_1_power','Server')]\
+          \ %}\n{% set ns = namespace(rows=[], total=0, mx=1) %}\n{% for e, n in items %}{% set v = states(e)|float(0) %}{% set ns.total = ns.total + v %}{% if v >= 1 %}{% set ns.rows = ns.rows + [(v, n)]\
+          \ %}{% if v > ns.mx %}{% set ns.mx = v %}{% endif %}{% endif %}{% endfor %}\n## ⚡ Τώρα: {{ ns.total|round(0)|int }} W <small>(άθροισμα καταγεγραμμένων συσκευών)</small>\n{% if ns.rows|length ==\
+          \ 0 %}Δεν υπάρχει αξιόλογη κατανάλωση αυτή τη στιγμή.{% endif %}\n{% for v, n in ns.rows|sort(reverse=true) %}**{{ n }}** · {{ v|round(0)|int }} W  \n`{{ '█' * ((v / ns.mx * 18)|round(0)|int)\
+          \ }}`\n\n{% endfor %}"
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Ισχύς τελευταίες 24 ώρες
+        icon: mdi:chart-line
+        grid_options:
+          columns: 12
+      - type: history-graph
+        hours_to_show: 24
+        entities:
+        - sensor.proem_consumption_1g_energy_meter_1_power
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Κατανάλωση ανά ώρα (48 ώρες)
+        icon: mdi:chart-bar
+        grid_options:
+          columns: 12
+      - type: statistics-graph
+        entities:
+        - sensor.proem_consumption_1g_energy_meter_1_energy
+        period: hour
+        days_to_show: 2
+        stat_types:
+        - change
+        chart_type: bar
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Κατανάλωση ανά ημέρα (30 ημέρες)
+        icon: mdi:calendar-month
+        grid_options:
+          columns: 12
+      - type: statistics-graph
+        entities:
+        - sensor.proem_consumption_1g_energy_meter_1_energy
+        period: day
+        days_to_show: 30
+        stat_types:
+        - change
+        chart_type: bar
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Κατανάλωση ανά μήνα (12 μήνες)
+        icon: mdi:calendar
+        grid_options:
+          columns: 12
+      - type: statistics-graph
+        entities:
+        - sensor.proem_consumption_1g_energy_meter_1_energy
+        period: month
+        days_to_show: 365
+        stat_types:
+        - change
+        chart_type: bar
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Θερμοσίφωνας
+        icon: mdi:water-boiler
+        grid_options:
+          columns: 12
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-template-card
+          entity: switch.boiler_ground
+          primary: Θερμοσίφωνας
+          secondary: '{{ ''Ανοιχτό'' if is_state(''switch.boiler_ground'',''on'') else ''Κλειστό'' }}'
+          icon: mdi:water-boiler
+          icon_color: '{{ ''orange'' if is_state(''switch.boiler_ground'',''on'') else ''disabled'' }}'
+          tap_action:
+            action: toggle
+          grid_options:
+            columns: 12
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Συνολικά για όλο το σπίτι, με επιλογή περιόδου
+        icon: mdi:chart-bar
+        tap_action:
+          action: navigate
+          navigation_path: '#g_energy_all'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_energy_all'
+      name: Ρεύμα · όλο το σπίτι
+      icon: mdi:chart-bar
+      grid_options:
+        columns: full
+      cards:
+      - type: energy-date-selection
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: energy-usage-graph
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: energy-devices-graph
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω στον όροφο (Ισόγειο)
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_energy'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_water'
+      name: Νερό · Ισόγειο
+      icon: mdi:water
+      grid_options:
+        columns: full
+      cards:
+      - type: markdown
+        content: '## 💧 Τώρα: {{ states(''sensor.water_meter_water_meter_1_flow'') }} {{ state_attr(''sensor.water_meter_water_meter_1_flow'',''unit_of_measurement'') or '''' }}
+
+          Βάνα αυλής: **{{ ''ανοιχτή (πότισμα)'' if is_state(''switch.out_watervalve_1'',''on'') else ''κλειστή'' }}**
+
+
+          Σύνολο μετρητή: **{{ states(''sensor.water_meter_water_meter_1_total'') }} {{ state_attr(''sensor.water_meter_water_meter_1_total'',''unit_of_measurement'') or '''' }}**'
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Ροή τελευταίες 24 ώρες
+        icon: mdi:chart-line
+        grid_options:
+          columns: 12
+      - type: history-graph
+        hours_to_show: 24
+        entities:
+        - sensor.water_meter_water_meter_1_flow
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Κατανάλωση ανά ώρα (48 ώρες)
+        icon: mdi:chart-bar
+        grid_options:
+          columns: 12
+      - type: statistics-graph
+        entities:
+        - sensor.water_meter_water_meter_1_total
+        period: hour
+        days_to_show: 2
+        stat_types:
+        - change
+        chart_type: bar
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Κατανάλωση ανά ημέρα (30 ημέρες)
+        icon: mdi:calendar-month
+        grid_options:
+          columns: 12
+      - type: statistics-graph
+        entities:
+        - sensor.water_meter_water_meter_1_total
+        period: day
+        days_to_show: 30
+        stat_types:
+        - change
+        chart_type: bar
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Κατανάλωση ανά μήνα (12 μήνες)
+        icon: mdi:calendar
+        grid_options:
+          columns: 12
+      - type: statistics-graph
+        entities:
+        - sensor.water_meter_water_meter_1_total
+        period: month
+        days_to_show: 365
+        stat_types:
+        - change
+        chart_type: bar
+        grid_options:
+          columns: 12
+          rows: auto
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_hotwater_history'
+      name: Θερμοκρασία ζεστού νερού
+      icon: mdi:chart-line
+      grid_options:
+        columns: full
+      cards:
+      - type: history-graph
+        hours_to_show: 24
+        entities:
+        - sensor.ground_hotwater_temperature
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: history-graph
+        hours_to_show: 168
+        entities:
+        - sensor.ground_hotwater_temperature
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_energy'
+        grid_options:
+          columns: 12
+    - type: custom:bubble-card
+      card_type: pop-up
+      hash: '#g_washer'
+      name: Πλυντήριο
+      icon: mdi:washing-machine
+      grid_options:
+        columns: full
+      cards:
+      - type: conditional
+        conditions:
+        - condition: state
+          entity: sensor.washer_status
+          state:
+          - washing
+        card:
+          type: picture
+          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMjYwIiB3aWR0aD0iNjQwIiBoZWlnaHQ9IjI2MCI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImJvZHkiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDNkNWMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMzJhNDUiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9ImdsYXNzIiBjeD0iMC40IiBjeT0iMC4zNSIgcj0iMC44Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM5ZmQ4ZmYiIHN0b3Atb3BhY2l0eT0iMC4zMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBmMTczMCIgc3RvcC1vcGFjaXR5PSIwLjg1Ii8+PC9yYWRpYWxHcmFkaWVudD4KPHJhZGlhbEdyYWRpZW50IGlkPSJoYWxvIiBjeD0iMC41IiBjeT0iMC41IiByPSIwLjUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzVlYzhmZiIgc3RvcC1vcGFjaXR5PSIwLjM1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWVjOGZmIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50Pgo8Y2xpcFBhdGggaWQ9ImNsaXAiPjxjaXJjbGUgY3g9IjMyMCIgY3k9IjE1MCIgcj0iNTIiLz48L2NsaXBQYXRoPgo8L2RlZnM+CjxlbGxpcHNlIGN4PSIzMjAiIGN5PSIxNTAiIHJ4PSIyNTAiIHJ5PSIxMjAiIGZpbGw9InVybCgjaGFsbykiLz4KPGVsbGlwc2UgY3g9IjMyMCIgY3k9IjI0NCIgcng9IjEwNCIgcnk9IjkiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4zNSIvPgo8cmVjdCB4PSIyMjAiIHk9IjI0IiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIxMiIgcng9IjIyIiBmaWxsPSJ1cmwoI2JvZHkpIiBzdHJva2U9IiM1OTYyN2EiIHN0cm9rZS13aWR0aD0iMyIvPgo8cmVjdCB4PSIyMzQiIHk9IjM2IiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjM0IiByeD0iMTAiIGZpbGw9IiMxMDE2MmEiIGZpbGwtb3BhY2l0eT0iMC43IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjEwIi8+CjxjaXJjbGUgY3g9IjI1OCIgY3k9IjUzIiByPSIxMiIgZmlsbD0iIzFiMjM0MCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4zNSIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI1OCIgeTE9IjUzIiB4Mj0iMjU4IiB5Mj0iNDQiIHN0cm9rZT0iIzVlYzhmZiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHJlY3QgeD0iMjgyIiB5PSI0MyIgd2lkdGg9IjYyIiBoZWlnaHQ9IjIwIiByeD0iNSIgZmlsbD0iIzBhMGYyMCIgc3Ryb2tlPSIjNWVjOGZmIiBzdHJva2Utb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMjk2IiBjeT0iNTMiIHI9IjMiIGZpbGw9IiM1ZWM4ZmYiLz48Y2lyY2xlIGN4PSIzMTAiIGN5PSI1MyIgcj0iMyIgZmlsbD0iIzVlYzhmZiIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIzMjQiIGN5PSI1MyIgcj0iMyIgZmlsbD0iIzVlYzhmZiIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KPGNpcmNsZSBjeD0iMzc4IiBjeT0iNTMiIHI9IjYiIGZpbGw9IiM1ZWM4ZmYiLz4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSI2OCIgZmlsbD0iIzEwMTYyYSIgc3Ryb2tlPSIjNWVjOGZmIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1vcGFjaXR5PSIxIj48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2Utb3BhY2l0eSIgdmFsdWVzPSIwLjM1OzE7MC4zNSIgZHVyPSIycyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48L2NpcmNsZT4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSI1MiIgZmlsbD0idXJsKCNnbGFzcykiLz4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXApIj48Zz48YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InRyYW5zbGF0ZSIgdmFsdWVzPSIwIDA7MCAtNDswIDAiIGR1cj0iMi4ycyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGFkZGl0aXZlPSJzdW0iLz48Zz48YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InRyYW5zbGF0ZSIgZnJvbT0iMCAwIiB0bz0iLTQ4IDAiIGR1cj0iMS40cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48cGF0aCBkPSJNMjAwIDE1MCBxMTIgLTggMjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCBWMjIwIEgyMDAgWiIgZmlsbD0iIzVlYzhmZiIgZmlsbC1vcGFjaXR5PSIwLjM4Ii8+PC9nPjwvZz48L2c+PGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXApIj48Zz48YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZnJvbT0iMCAzMjAgMTUwIiB0bz0iMzYwIDMyMCAxNTAiIGR1cj0iMi42cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiLz48ZWxsaXBzZSBjeD0iMjk4IiBjeT0iMTY0IiByeD0iMjAiIHJ5PSIxMyIgZmlsbD0iI2ZmOGE5YyIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzQwIiBjeT0iMTQwIiByeD0iMTgiIHJ5PSIxMiIgZmlsbD0iI2ZmZDQ1ZSIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzMwIiBjeT0iMTc2IiByeD0iMTciIHJ5PSIxMSIgZmlsbD0iI2I2OWNmZiIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzA2IiBjeT0iMTI2IiByeD0iMTUiIHJ5PSIxMCIgZmlsbD0iIzZmZTNhMCIgZmlsbC1vcGFjaXR5PSIwLjkiLz48L2c+PC9nPjxjaXJjbGUgY3g9IjI5NiIgY3k9IjE5NiIgcj0iNCIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjU1Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgdmFsdWVzPSIyMDA7MTE4IiBkdXI9IjIuOHMiIGJlZ2luPSIwLjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgdmFsdWVzPSIwOzAuNjswIiBkdXI9IjIuOHMiIGJlZ2luPSIwLjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjMyMCIgY3k9IjE5NiIgcj0iMyIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjU1Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgdmFsdWVzPSIyMDA7MTE4IiBkdXI9IjMuNHMiIGJlZ2luPSIwLjVzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgdmFsdWVzPSIwOzAuNjswIiBkdXI9IjMuNHMiIGJlZ2luPSIwLjVzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjM0MiIgY3k9IjE5NiIgcj0iNSIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjU1Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgdmFsdWVzPSIyMDA7MTE4IiBkdXI9IjIuNHMiIGJlZ2luPSIxLjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgdmFsdWVzPSIwOzAuNjswIiBkdXI9IjIuNHMiIGJlZ2luPSIxLjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjMwOCIgY3k9IjE5NiIgcj0iMyIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjU1Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgdmFsdWVzPSIyMDA7MTE4IiBkdXI9IjMuOXMiIGJlZ2luPSIxLjVzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgdmFsdWVzPSIwOzAuNjswIiBkdXI9IjMuOXMiIGJlZ2luPSIxLjVzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjMzMiIgY3k9IjE5NiIgcj0iNCIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjU1Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgdmFsdWVzPSIyMDA7MTE4IiBkdXI9IjMuMXMiIGJlZ2luPSIyLjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwtb3BhY2l0eSIgdmFsdWVzPSIwOzAuNjswIiBkdXI9IjMuMXMiIGJlZ2luPSIyLjBzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvY2lyY2xlPgo8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxNTAiIHI9IjUyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTI4MiAxMjAgQTQ4IDQ4IDAgMCAxIDMxNCAxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cgo8L3N2Zz4=
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: conditional
+        conditions:
+        - condition: state
+          entity: sensor.washer_status
+          state:
+          - finished
+        card:
+          type: picture
+          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMjYwIiB3aWR0aD0iNjQwIiBoZWlnaHQ9IjI2MCI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImJvZHkiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDNkNWMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMzJhNDUiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9ImdsYXNzIiBjeD0iMC40IiBjeT0iMC4zNSIgcj0iMC44Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM5ZmQ4ZmYiIHN0b3Atb3BhY2l0eT0iMC4zMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBmMTczMCIgc3RvcC1vcGFjaXR5PSIwLjg1Ii8+PC9yYWRpYWxHcmFkaWVudD4KPHJhZGlhbEdyYWRpZW50IGlkPSJoYWxvIiBjeD0iMC41IiBjeT0iMC41IiByPSIwLjUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzZmZTNhMCIgc3RvcC1vcGFjaXR5PSIwLjMxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNmZlM2EwIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50Pgo8Y2xpcFBhdGggaWQ9ImNsaXAiPjxjaXJjbGUgY3g9IjMyMCIgY3k9IjE1MCIgcj0iNTIiLz48L2NsaXBQYXRoPgo8L2RlZnM+CjxlbGxpcHNlIGN4PSIzMjAiIGN5PSIxNTAiIHJ4PSIyNTAiIHJ5PSIxMjAiIGZpbGw9InVybCgjaGFsbykiLz4KPGVsbGlwc2UgY3g9IjMyMCIgY3k9IjI0NCIgcng9IjEwNCIgcnk9IjkiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4zNSIvPgo8cmVjdCB4PSIyMjAiIHk9IjI0IiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIxMiIgcng9IjIyIiBmaWxsPSJ1cmwoI2JvZHkpIiBzdHJva2U9IiM1OTYyN2EiIHN0cm9rZS13aWR0aD0iMyIvPgo8cmVjdCB4PSIyMzQiIHk9IjM2IiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjM0IiByeD0iMTAiIGZpbGw9IiMxMDE2MmEiIGZpbGwtb3BhY2l0eT0iMC43IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjEwIi8+CjxjaXJjbGUgY3g9IjI1OCIgY3k9IjUzIiByPSIxMiIgZmlsbD0iIzFiMjM0MCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4zNSIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI1OCIgeTE9IjUzIiB4Mj0iMjU4IiB5Mj0iNDQiIHN0cm9rZT0iIzZmZTNhMCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHJlY3QgeD0iMjgyIiB5PSI0MyIgd2lkdGg9IjYyIiBoZWlnaHQ9IjIwIiByeD0iNSIgZmlsbD0iIzBhMGYyMCIgc3Ryb2tlPSIjNmZlM2EwIiBzdHJva2Utb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMjk2IiBjeT0iNTMiIHI9IjMiIGZpbGw9IiM2ZmUzYTAiLz48Y2lyY2xlIGN4PSIzMTAiIGN5PSI1MyIgcj0iMyIgZmlsbD0iIzZmZTNhMCIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIzMjQiIGN5PSI1MyIgcj0iMyIgZmlsbD0iIzZmZTNhMCIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KPGNpcmNsZSBjeD0iMzc4IiBjeT0iNTMiIHI9IjYiIGZpbGw9IiM2ZmUzYTAiLz4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSI2OCIgZmlsbD0iIzEwMTYyYSIgc3Ryb2tlPSIjNmZlM2EwIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1vcGFjaXR5PSIxIj48L2NpcmNsZT4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSI1MiIgZmlsbD0idXJsKCNnbGFzcykiLz4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXApIj48Zz48Zz48cGF0aCBkPSJNMjAwIDE1MCBxMTIgLTggMjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCBWMjIwIEgyMDAgWiIgZmlsbD0iIzVlYzhmZiIgZmlsbC1vcGFjaXR5PSIwLjM4Ii8+PC9nPjwvZz48L2c+PGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXApIj48Zz48ZWxsaXBzZSBjeD0iMjk4IiBjeT0iMTY0IiByeD0iMjAiIHJ5PSIxMyIgZmlsbD0iI2ZmOGE5YyIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzQwIiBjeT0iMTQwIiByeD0iMTgiIHJ5PSIxMiIgZmlsbD0iI2ZmZDQ1ZSIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzMwIiBjeT0iMTc2IiByeD0iMTciIHJ5PSIxMSIgZmlsbD0iI2I2OWNmZiIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzA2IiBjeT0iMTI2IiByeD0iMTUiIHJ5PSIxMCIgZmlsbD0iIzZmZTNhMCIgZmlsbC1vcGFjaXR5PSIwLjkiLz48L2c+PC9nPgo8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxNTAiIHI9IjUyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTI4MiAxMjAgQTQ4IDQ4IDAgMCAxIDMxNCAxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjQxOCIgY3k9IjQ4IiByPSIyMiIgZmlsbD0iIzEyMzAxZiIgc3Ryb2tlPSIjNmZlM2EwIiBzdHJva2Utd2lkdGg9IjMiLz48cGF0aCBkPSJNNDA3IDQ4IEw0MTUgNTYgTDQzMCAzOSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmZlM2EwIiBzdHJva2Utd2lkdGg9IjQuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: conditional
+        conditions:
+        - condition: state
+          entity: sensor.washer_status
+          state:
+          - idle
+          - unknown
+          - unavailable
+        card:
+          type: picture
+          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMjYwIiB3aWR0aD0iNjQwIiBoZWlnaHQ9IjI2MCI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImJvZHkiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDNkNWMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMyMzJhNDUiLz48L2xpbmVhckdyYWRpZW50Pgo8cmFkaWFsR3JhZGllbnQgaWQ9ImdsYXNzIiBjeD0iMC40IiBjeT0iMC4zNSIgcj0iMC44Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM5ZmQ4ZmYiIHN0b3Atb3BhY2l0eT0iMC4zMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBmMTczMCIgc3RvcC1vcGFjaXR5PSIwLjg1Ii8+PC9yYWRpYWxHcmFkaWVudD4KPHJhZGlhbEdyYWRpZW50IGlkPSJoYWxvIiBjeD0iMC41IiBjeT0iMC41IiByPSIwLjUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjA3Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50Pgo8Y2xpcFBhdGggaWQ9ImNsaXAiPjxjaXJjbGUgY3g9IjMyMCIgY3k9IjE1MCIgcj0iNTIiLz48L2NsaXBQYXRoPgo8L2RlZnM+CjxlbGxpcHNlIGN4PSIzMjAiIGN5PSIxNTAiIHJ4PSIyNTAiIHJ5PSIxMjAiIGZpbGw9InVybCgjaGFsbykiLz4KPGVsbGlwc2UgY3g9IjMyMCIgY3k9IjI0NCIgcng9IjEwNCIgcnk9IjkiIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4zNSIvPgo8cmVjdCB4PSIyMjAiIHk9IjI0IiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIxMiIgcng9IjIyIiBmaWxsPSJ1cmwoI2JvZHkpIiBzdHJva2U9IiM1OTYyN2EiIHN0cm9rZS13aWR0aD0iMyIvPgo8cmVjdCB4PSIyMzQiIHk9IjM2IiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjM0IiByeD0iMTAiIGZpbGw9IiMxMDE2MmEiIGZpbGwtb3BhY2l0eT0iMC43IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjEwIi8+CjxjaXJjbGUgY3g9IjI1OCIgY3k9IjUzIiByPSIxMiIgZmlsbD0iIzFiMjM0MCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utb3BhY2l0eT0iMC4zNSIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjI1OCIgeTE9IjUzIiB4Mj0iMjU4IiB5Mj0iNDQiIHN0cm9rZT0iIzU5NjI3YSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHJlY3QgeD0iMjgyIiB5PSI0MyIgd2lkdGg9IjYyIiBoZWlnaHQ9IjIwIiByeD0iNSIgZmlsbD0iIzBhMGYyMCIgc3Ryb2tlPSIjNTk2MjdhIiBzdHJva2Utb3BhY2l0eT0iMC42Ii8+PGNpcmNsZSBjeD0iMjk2IiBjeT0iNTMiIHI9IjMiIGZpbGw9IiM1OTYyN2EiLz48Y2lyY2xlIGN4PSIzMTAiIGN5PSI1MyIgcj0iMyIgZmlsbD0iIzU5NjI3YSIgZmlsbC1vcGFjaXR5PSIwLjUiLz48Y2lyY2xlIGN4PSIzMjQiIGN5PSI1MyIgcj0iMyIgZmlsbD0iIzU5NjI3YSIgZmlsbC1vcGFjaXR5PSIwLjMiLz4KPGNpcmNsZSBjeD0iMzc4IiBjeT0iNTMiIHI9IjYiIGZpbGw9IiM1OTYyN2EiLz4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSI2OCIgZmlsbD0iIzEwMTYyYSIgc3Ryb2tlPSIjNTk2MjdhIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1vcGFjaXR5PSIxIj48L2NpcmNsZT4KPGNpcmNsZSBjeD0iMzIwIiBjeT0iMTUwIiByPSI1MiIgZmlsbD0idXJsKCNnbGFzcykiLz4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXApIj48Zz48Zz48cGF0aCBkPSJNMjAwIDE2OCBxMTIgLTggMjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCB0MjQgMCBWMjIwIEgyMDAgWiIgZmlsbD0iIzVlYzhmZiIgZmlsbC1vcGFjaXR5PSIwLjEyIi8+PC9nPjwvZz48L2c+PGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXApIj48Zz48ZWxsaXBzZSBjeD0iMjk4IiBjeT0iMTY0IiByeD0iMjAiIHJ5PSIxMyIgZmlsbD0iI2ZmOGE5YyIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzQwIiBjeT0iMTQwIiByeD0iMTgiIHJ5PSIxMiIgZmlsbD0iI2ZmZDQ1ZSIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzMwIiBjeT0iMTc2IiByeD0iMTciIHJ5PSIxMSIgZmlsbD0iI2I2OWNmZiIgZmlsbC1vcGFjaXR5PSIwLjkiLz48ZWxsaXBzZSBjeD0iMzA2IiBjeT0iMTI2IiByeD0iMTUiIHJ5PSIxMCIgZmlsbD0iIzZmZTNhMCIgZmlsbC1vcGFjaXR5PSIwLjkiLz48L2c+PC9nPgo8Y2lyY2xlIGN4PSIzMjAiIGN5PSIxNTAiIHI9IjUyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjE4IiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTI4MiAxMjAgQTQ4IDQ4IDAgMCAxIDMxNCAxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMzUiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cgo8L3N2Zz4=
+          tap_action:
+            action: none
+          hold_action:
+            action: none
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: markdown
+        content: '{% macro dur(m) -%}{% set m = m|float(0)|round(0)|int %}{% if m >= 60 %}{{ m // 60 }} ώ {{ m % 60 }} λ{% else %}{{ m }} λ{% endif %}{%- endmacro %}
+
+          {% macro when(ts) -%}{% set ts = ts|float(0) %}{% if ts == 0 %}—{% else %}{% set dd = ts|timestamp_custom(''%Y-%m-%d'', true) %}{% if dd == now().strftime(''%Y-%m-%d'') %}Σήμερα{% elif dd == (now()
+          - timedelta(days=1)).strftime(''%Y-%m-%d'') %}Χθες{% else %}{{ ts|timestamp_custom(''%d/%m'', true) }}{% endif %} {{ ts|timestamp_custom(''%H:%M'', true) }}{% endif %}{%- endmacro %}
+
+          {% set st = states(''sensor.washer_status'') %}{% set start = state_attr(''input_datetime.washer_last_start'',''timestamp'') %}{% set end = state_attr(''input_datetime.washer_last_end'',''timestamp'')
+          %}
+
+          {% set p = states(''sensor.1pm_socket_2_bth_washing_1_power'')|float(0) %}
+
+          {% if st == ''washing'' %}
+
+          ## 🫧 Πλένει τώρα
+
+          Ξεκίνησε **{{ when(start) }}** · τρέχει εδώ και **{{ dur((now().timestamp() - start|float(0)) / 60) }}** · ισχύς **{{ p|round(0)|int }} W**
+
+          {% elif st == ''finished'' %}
+
+          ## ✅ Τελείωσε
+
+          Τέλος **{{ when(end) }}** · διήρκεσε **{{ dur(states(''input_number.washer_last_duration'')) }}** · περιμένει εδώ και {{ dur((now().timestamp() - end|float(0)) / 60) }}. Βγάλε τα ρούχα!
+
+          {% else %}
+
+          ## 💤 Αδρανές
+
+          Τελευταίο πλύσιμο **{{ when(start) }} → {{ when(end) }}** ({{ dur(states(''input_number.washer_last_duration'')) }})
+
+          {% endif %}'
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:mushroom-template-card
+          entity: sensor.1pm_socket_2_bth_washing_1_power
+          primary: Ισχύς τώρα
+          secondary: '{{ states(''sensor.1pm_socket_2_bth_washing_1_power'')|float(0)|round(0)|int }} W'
+          icon: mdi:flash
+          icon_color: amber
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: input_number.washer_last_duration
+          primary: Διάρκεια τελευταίου κύκλου
+          secondary: '{{ states(''input_number.washer_last_duration'')|float(0)|round(0)|int }} λεπτά'
+          icon: mdi:timer-outline
+          icon_color: teal
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: input_number.washer_last_energy
+          primary: Ενέργεια τελευταίου κύκλου
+          secondary: '{{ states(''input_number.washer_last_energy'') }} {{ state_attr(''sensor.1pm_socket_2_bth_washing_1_energy'',''unit_of_measurement'') or '''' }}'
+          icon: mdi:lightning-bolt
+          icon_color: orange
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.washer_cycles_today
+          primary: Πλύσεις σήμερα
+          secondary: '{{ states(''sensor.washer_cycles_today'') }}'
+          icon: mdi:counter
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.washer_cycles_week
+          primary: Πλύσεις αυτή την εβδομάδα
+          secondary: '{{ states(''sensor.washer_cycles_week'') }}'
+          icon: mdi:calendar-week
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.washer_cycles_month
+          primary: Πλύσεις αυτόν τον μήνα
+          secondary: '{{ states(''sensor.washer_cycles_month'') }}'
+          icon: mdi:calendar-month
+          icon_color: blue
+          tap_action: *id003
+        - type: custom:mushroom-template-card
+          entity: sensor.washer_hours_month
+          primary: Ώρες λειτουργίας (μήνας)
+          secondary: '{{ states(''sensor.washer_hours_month'') }} ώ'
+          icon: mdi:clock-outline
+          icon_color: grey
+          tap_action: *id003
+        - type: conditional
+          conditions:
+          - &id012
+            condition: numeric_state
+            entity: sensor.1pm_socket_2_bth_washing_1_power
+            above: 2
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_2_bth_washing_1
+            primary: Πρίζα πλυντηρίου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_2_bth_washing_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+              confirmation:
+                text: Το πλυντήριο καταναλώνει ρεύμα (πιθανόν πλένει). Αν κλείσεις την πρίζα ο κύκλος θα διακοπεί. Είσαι σίγουρος;
+        - type: conditional
+          conditions:
+          - condition: not
+            conditions:
+            - *id012
+          card:
+            type: custom:mushroom-template-card
+            entity: switch.1pm_socket_2_bth_washing_1
+            primary: Πρίζα πλυντηρίου
+            secondary: '{{ ''Ανοιχτό'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''Κλειστό'' }} · {{ states(''sensor.1pm_socket_2_bth_washing_1_power'')|float(0)|round(0) }} W'
+            icon: mdi:power-socket-eu
+            icon_color: '{{ ''amber'' if is_state(''switch.1pm_socket_2_bth_washing_1'',''on'') else ''disabled'' }}'
+            tap_action:
+              action: toggle
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Ισχύς τελευταίες 24 ώρες
+        icon: mdi:chart-line
+        grid_options:
+          columns: 12
+      - type: history-graph
+        hours_to_show: 24
+        entities:
+        - sensor.1pm_socket_2_bth_washing_1_power
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: separator
+        name: Ιστορικό κύκλων (7 ημέρες)
+        icon: mdi:history
+        grid_options:
+          columns: 12
+      - type: logbook
+        hours_to_show: 168
+        entities:
+        - binary_sensor.washer_running
+        grid_options:
+          columns: 12
+          rows: auto
+      - type: custom:bubble-card
+        card_type: button
+        button_type: name
+        name: Πίσω στο μπάνιο
+        icon: mdi:arrow-left
+        tap_action:
+          action: navigate
+          navigation_path: '#g_bath'
+        grid_options:
+          columns: 12

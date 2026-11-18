@@ -1,0 +1,13 @@
+{
+  "domain": "floorplan_studio",
+  "name": "Floorplan Studio",
+  "codeowners": ["@tsirikas09"],
+  "config_flow": true,
+  "dependencies": ["http", "frontend", "websocket_api"],
+  "documentation": "https://github.com/tsirikas09/floorplan-studio",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/tsirikas09/floorplan-studio/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

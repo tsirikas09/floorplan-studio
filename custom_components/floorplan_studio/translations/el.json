@@ -1,0 +1,6 @@
+{
+  "config": {
+    "step": {"user": {"title": "Floorplan Studio", "description": "Προσθέτει την κάρτα κάτοψης και αποθηκεύει τη διάταξη του σπιτιού σου. Δεν χρειάζονται ρυθμίσεις."}},
+    "abort": {"single_instance_allowed": "Το Floorplan Studio είναι ήδη ρυθμισμένο."}
+  }
+}
