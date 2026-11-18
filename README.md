@@ -1,6 +1,6 @@
 # Floorplan Studio
 
-Διαδραστική κάτοψη σπιτιού για το Home Assistant. Μία integration και μία κάρτα που ζωγραφίζουν τον όροφό σου από έναν **περιγραφέα** (όροφοι, δωμάτια, συσκευές, θέσεις), χωρίς ογκώδη YAML.
+Διαδραστική κάτοψη σπιτιού για το Home Assistant. Ένα integration και μία κάρτα που ζωγραφίζουν τον όροφό σου από έναν **περιγραφέα** (όροφοι, δωμάτια, συσκευές, θέσεις), χωρίς ογκώδη YAML.
 
 *Interactive floor plan for Home Assistant. One integration + one card that draw your floors from a stored house descriptor.*
 
